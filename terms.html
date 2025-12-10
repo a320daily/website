@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Service | A320 Daily</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'sans-serif'] },
+            colors: {
+              brand: {
+                50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
+                400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+                800: '#1e40af', 900: '#1e3a8a',
+              }
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="font-sans antialiased text-slate-900 bg-white">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                 <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
+                    <img src="https://lh3.googleusercontent.com/d/1kIevIuOrtRaBEIgS15EQ9G9lmqFyQOSV" alt="A320 Daily Logo" class="h-14 w-auto object-contain block">
+                </a>
+                <a href="index.html" class="text-sm font-medium text-brand-600 hover:text-brand-800">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="pt-28 pb-16 bg-white min-h-screen">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="index.html" class="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium mb-8 transition-colors">
+          <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+          Back to Home
+        </a>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-8">Terms of Service</h1>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <i data-lucide="alert-triangle" class="h-5 w-5 text-amber-500"></i>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-amber-700 font-bold">CRITICAL DISCLAIMER: FOR EDUCATIONAL PURPOSES ONLY</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="prose prose-slate max-w-none text-slate-600">
+          <p class="mb-6">Welcome to A320 Daily. By accessing our website, subscribing to our emails, or using our tools, you agree to be bound by these Terms of Service.</p>
+
+          <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">1. Not for Operational Use</h2>
+          <p class="mb-4">The content, questions, answers, and tools provided by A320 Daily are strictly for <strong>educational and training purposes only</strong>.</p>
+          <ul class="list-disc pl-5 mb-6 space-y-2">
+            <li><strong>Do not</strong> use any information from this site for actual flight operations.</li>
+            <li><strong>Always</strong> defer to your airline's specific Flight Crew Operating Manual (FCOM), Flight Crew Training Manual (FCTM), Company Operations Manuals, and Quick Reference Handbook (QRH).</li>
+            <li>In the event of a conflict between our content and official Airbus or airline manuals, the official manuals shall <strong>always</strong> prevail.</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">2. Limitation of Liability</h2>
+          <p class="mb-6">A320 Daily and its contributors shall not be held liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its display or use. You are solely responsible for verifying the accuracy of any data used in a professional context.</p>
+
+          <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">3. Intellectual Property</h2>
+          <p class="mb-6">The original content (daily questions, website design, and proprietary tools) is owned by A320 Daily. You may not reproduce, distribute, or create derivative works from this content without express written permission.</p>
+
+          <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">4. Modifications</h2>
+          <p class="mb-6">We reserve the right to revise these terms at any time. By continuing to use the site after changes are made, you agree to be bound by the revised terms.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-base text-slate-400">&copy; <span id="year"></span> A320 Daily. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

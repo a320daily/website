@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A320 Daily | Safer, More Efficient Flying</title>
+    <meta name="description" content="Daily microlearning and professional tools for A320 pilots. Elevate your flight operations knowledge." />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'sans-serif'] },
+            colors: {
+              brand: {
+                50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
+                400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+                800: '#1e40af', 900: '#1e3a8a',
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        /* Simple fade animation classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Slideshow transition */
+        #slideshow-img { transition: opacity 0.5s ease-in-out; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25",
+    "vite": "https://aistudiocdn.com/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="font-sans antialiased text-slate-900 bg-white">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <a href="#" class="flex-shrink-0 flex items-center cursor-pointer">
+                    <img src="https://lh3.googleusercontent.com/d/1kIevIuOrtRaBEIgS15EQ9G9lmqFyQOSV" alt="A320 Daily Logo" class="h-14 md:h-16 w-auto object-contain block">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#microlearning" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Microlearning</a>
+                    <a href="#tools" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Flight Tools</a>
+                    <a href="#about" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">About</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXm2LBquLUwVBEeBWAvFzLMs7mrCg6_XQqdlyIEi6wMNPcMg/viewform" target="_blank" class="bg-brand-600 text-white px-5 py-2.5 rounded-full font-medium hover:bg-brand-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Start Learning</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-brand-600 focus:outline-none p-2">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#microlearning" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">Microlearning</a>
+                <a href="#tools" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">Flight Tools</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-md">About</a>
+                <div class="pt-4">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXm2LBquLUwVBEeBWAvFzLMs7mrCg6_XQqdlyIEi6wMNPcMg/viewform" target="_blank" class="block w-full text-center bg-brand-600 text-white px-5 py-3 rounded-lg font-bold shadow-md">Sign Up Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-slate-50">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-100/50 blur-3xl opacity-60"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-100/50 blur-3xl opacity-60"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <!-- Text Content -->
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-600"></span>
+                        Make Flying Safer & More Efficient
+                    </div>
+                    
+                    <h1 class="text-4xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">
+                        Master the <span class="text-brand-600">A320</span> <br/>
+                        One Day at a Time.
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+                        Join thousands of pilots using our daily microlearning platform and professional flight tools to streamline operations and enhance technical knowledge.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXm2LBquLUwVBEeBWAvFzLMs7mrCg6_XQqdlyIEi6wMNPcMg/viewform" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-brand-600 rounded-lg hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 group">
+                            Join Daily Knowledge
+                            <i data-lucide="arrow-right" class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="https://buymeacoffee.com/a320daily/extras" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-brand-800 bg-brand-100 border border-brand-200 rounded-lg hover:bg-brand-200 transition-all shadow-sm group">
+                            Get Flight Tools
+                            <i data-lucide="arrow-right" class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 flex flex-wrap items-center gap-6 text-sm text-slate-500 font-medium">
+                        <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500"></i><span>Free Resources</span></div>
+                        <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500"></i><span>Optimized for iPad</span></div>
+                        <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500"></i><span>Daily Insights</span></div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="reveal relative lg:h-auto flex justify-center lg:justify-end">
+                    <div class="relative w-full max-w-lg">
+                        <div class="absolute top-0 right-0 w-3/4 transform translate-x-4 -translate-y-4 rotate-3 opacity-90 z-0">
+                            <img src="https://lh3.googleusercontent.com/d/1dZnQt1HGlQ3Im7Ikt6AQRmICRBY4RkT5" alt="A320 Flight Tool Interface" class="w-full h-auto drop-shadow-2xl rounded-lg">
+                        </div>
+                        <div class="relative z-10 w-3/4 transform -rotate-2">
+                            <img src="https://lh3.googleusercontent.com/d/1IiunH-odbzKwyD7JwM19LEhuXektYsxc" alt="Daily Question Example" class="w-full h-auto drop-shadow-2xl rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURES SECTION -->
+    <section class="py-20 bg-white" id="features">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-base font-semibold text-brand-600 tracking-wide uppercase">Why A320 Daily?</h2>
+                <p class="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">Built by pilots, for pilots.</p>
+                <p class="mt-4 text-xl text-slate-500">We focus on two things: <br /> keeping your knowledge sharp and your operations smooth.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Items -->
+                <div class="reveal relative p-8 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 group">
+                    <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-lg mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Daily Microlearning</h3>
+                    <p class="text-slate-600 leading-relaxed">Receive a single, high-impact A320 question via email every morning. Test your knowledge in 30 seconds.</p>
+                </div>
+
+                <div class="reveal relative p-8 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 group">
+                    <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-lg mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="tablet" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">iPad Optimized Tools</h3>
+                    <p class="text-slate-600 leading-relaxed">Powerful iOS Shortcuts designed specifically for the flight deck environment. Calculate, convert, and verify efficiently.</p>
+                </div>
+                
+                <div class="reveal relative p-8 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 group">
+                    <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-lg mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="clock" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Save Precious Time</h3>
+                    <p class="text-slate-600 leading-relaxed">Automate routine calculations. Our tools are built to reduce workload during critical phases of flight.</p>
+                </div>
+
+                <div class="reveal relative p-8 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 group">
+                    <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-lg mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Enhance Safety</h3>
+                    <p class="text-slate-600 leading-relaxed">Continuous learning and accurate tools lead to better situational awareness and safer operations.</p>
+                </div>
+
+                <div class="reveal relative p-8 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 group">
+                    <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-lg mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Curated Knowledge</h3>
+                    <p class="text-slate-600 leading-relaxed">Content derived from FCOM, FCTM, Company Operations Manuals, and industry best practices. Stay standard, stay safe.</p>
+                </div>
+
+                <div class="reveal relative p-8 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 group">
+                    <div class="inline-flex items-center justify-center p-3 bg-brand-100 text-brand-600 rounded-lg mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Instant Access</h3>
+                    <p class="text-slate-600 leading-relaxed">No logins to remember for the tools. No heavy apps. Just simple, effective solutions that work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASE SECTION (Microlearning) -->
+    <section class="py-24 bg-slate-900 relative overflow-hidden" id="microlearning">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-900/50 blur-3xl opacity-40"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-12 md:text-center md:max-w-3xl md:mx-auto reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-brand-400 text-xs font-bold uppercase tracking-wider mb-6 border border-slate-700">
+                    <i data-lucide="smartphone" class="w-3 h-3"></i> Daily Knowledge
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    The Daily Knowledge Check <br/>
+                    <span class="text-brand-500">Delivered to you.</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+                        Start your day with a focused technical question. It takes less than a minute to read and answer. 
+                        Immediate feedback with references helps reinforce your long-term memory of A320 systems and procedures.
+                    </p>
+                    
+                    <div class="space-y-5 mb-10">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0"><span class="text-brand-400 font-bold">1</span></div>
+                            <div><h4 class="text-white font-semibold text-lg">One Question Daily</h4><p class="text-slate-500 text-sm max-w-xs">Curated content sent straight to your inbox every morning.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0"><span class="text-brand-400 font-bold">2</span></div>
+                            <div><h4 class="text-white font-semibold text-lg">Instant Feedback</h4><p class="text-slate-500 text-sm max-w-xs">Click to reveal answers with FCOM/FCTM/Company Operations Manual references.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0"><span class="text-brand-400 font-bold">3</span></div>
+                            <div><h4 class="text-white font-semibold text-lg">Weekly Summaries</h4><p class="text-slate-500 text-sm max-w-xs">Review your progress and catch up on what you missed.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0"><span class="text-brand-400 font-bold">4</span></div>
+                            <div><h4 class="text-white font-semibold text-lg">Incident Reports</h4><p class="text-slate-500 text-sm max-w-xs">Learn from past incidents and accidents.</p></div>
+                        </div>
+                    </div>
+
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXm2LBquLUwVBEeBWAvFzLMs7mrCg6_XQqdlyIEi6wMNPcMg/viewform" target="_blank" class="inline-flex items-center px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition-all">
+                        Subscribe for Free <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- SLIDESHOW -->
+                <div class="reveal relative flex justify-center items-center">
+                    <div class="relative w-full max-w-sm overflow-hidden">
+                        <div class="aspect-[9/16] relative">
+                            <img id="slideshow-img" src="https://lh3.googleusercontent.com/d/1FwpCuMWxEqp0Iw0lSLciK98p_axA4CXB" alt="A320 Daily Knowledge" class="absolute inset-0 w-full h-full object-contain">
+                        </div>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[80%] bg-brand-500/20 rounded-full blur-[80px] -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLS SECTION -->
+    <section class="py-24 bg-brand-50 relative overflow-hidden" id="tools">
+        <div class="absolute -left-40 top-20 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Images Left -->
+                <div class="order-2 md:order-1 relative reveal">
+                    <div class="relative w-full max-w-lg mx-auto h-[500px] flex items-center justify-center">
+                        <div class="absolute transform translate-x-6 -translate-y-2 rotate-6 w-3/4 z-0 transition-transform hover:rotate-3 duration-500">
+                            <img src="https://lh3.googleusercontent.com/d/1dZnQt1HGlQ3Im7Ikt6AQRmICRBY4RkT5" alt="A320 Tool Interface" class="w-full h-auto object-contain drop-shadow-2xl">
+                        </div>
+                        <div class="absolute transform -translate-x-6 translate-y-2 -rotate-3 w-3/4 z-10 transition-transform hover:-rotate-1 duration-500">
+                            <img src="https://lh3.googleusercontent.com/d/1AntFPYiZ6P_k87aET8bl-4ASvjW4hZYV" alt="A320 Tool Interface" class="w-full h-auto object-contain drop-shadow-2xl">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Right -->
+                <div class="order-1 md:order-2 reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        <i data-lucide="tablet" class="w-3 h-3"></i> Professional Tools
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-snug">
+                        A Digital <br/>
+                        <span class="text-brand-600">Pilot's Toolkit.</span>
+                    </h2>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Turn your iPad into a powerful utility belt. Our shortcuts are designed to work seamlessly in the cockpit environment, 
+                        providing quick calculations and references without the need for complex, heavy apps.
+                    </p>
+                    <div class="grid grid-cols-1 gap-4 mb-10">
+                        <div class="flex items-center text-slate-700 font-medium text-lg"><span class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 text-sm font-bold">✓</span>One-Tap Shortcuts</div>
+                        <div class="flex items-center text-slate-700 font-medium text-lg"><span class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 text-sm font-bold">✓</span>Developed for efficiency</div>
+                        <div class="flex items-center text-slate-700 font-medium text-lg"><span class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 text-sm font-bold">✓</span>Tested in flight</div>
+                    </div>
+                    <a href="https://buymeacoffee.com/a320daily/extras" target="_blank" class="inline-flex items-center px-6 py-3 bg-white text-slate-700 border border-slate-200 font-medium rounded-lg hover:bg-slate-50 hover:text-brand-600 transition-all shadow-sm">
+                        Get the Tools <i data-lucide="external-link" class="ml-2 w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-10 lg:mb-0 reveal">
+                    <h2 class="text-base font-semibold text-brand-600 tracking-wide uppercase mb-2">About Us</h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900 sm:text-4xl mb-6">Bridging the gap between initial training and the flight line.</h3>
+                    <div class="prose prose-lg text-slate-500">
+                        <p class="mb-6">A320 Daily was born from a simple observation: technical knowledge decays without active maintenance. In the busy environment of line operations, it is easy to lose touch with the finer details of the FCOM, FCTM, and Company Operations Manuals.</p>
+                        <p>Our mission is to make professional development effortless. We provide pilots with high-quality, bite-sized learning resources and practical tools that fit seamlessly into their daily routine.</p>
+                    </div>
+                </div>
+                <div class="grid gap-8 reveal">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                        <div class="shrink-0 p-3 bg-brand-100 rounded-lg text-brand-600"><i data-lucide="users" class="w-6 h-6"></i></div>
+                        <div class="ml-4"><h4 class="text-lg font-bold text-slate-900">For Pilots, By Pilots</h4><p class="text-slate-500 mt-1 text-sm">Content curated by active A320 Captains.</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                        <div class="shrink-0 p-3 bg-brand-100 rounded-lg text-brand-600"><i data-lucide="target" class="w-6 h-6"></i></div>
+                        <div class="ml-4"><h4 class="text-lg font-bold text-slate-900">Practical Focus</h4><p class="text-slate-500 mt-1 text-sm">We focus on "need-to-know" operational implications.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-3xl font-extrabold text-slate-900 sm:text-4xl mb-6">Ready to upgrade your flight bag?</h2>
+            <p class="text-xl text-slate-500 mb-10">Join the community of aviation professionals dedicated to continuous improvement.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXm2LBquLUwVBEeBWAvFzLMs7mrCg6_XQqdlyIEi6wMNPcMg/viewform" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-lg hover:shadow-xl transition-all">
+                    Sign Up for Daily Email <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </a>
+                <a href="https://buymeacoffee.com/a320daily/extras" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-slate-200 text-lg font-medium rounded-lg text-slate-700 bg-yellow-50 hover:bg-yellow-100 transition-all">
+                    <i data-lucide="coffee" class="mr-2 w-5 h-5 text-yellow-600"></i> Browse Flight Tools
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:justify-start mb-6 md:mb-0">
+                    <img src="https://lh3.googleusercontent.com/d/1kIevIuOrtRaBEIgS15EQ9G9lmqFyQOSV" alt="A320 Daily" class="h-12 w-auto object-contain opacity-90 grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+                <div class="flex justify-center space-x-6 md:order-2">
+                    <a href="privacy.html" class="text-slate-400 hover:text-slate-500 transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="text-slate-400 hover:text-slate-500 transition-colors">Terms of Service</a>
+                    <a href="mailto:info@a320daily.com" class="text-slate-400 hover:text-slate-500 transition-colors">Contact</a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-slate-400">&copy; <span id="year"></span> A320 Daily. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Slideshow Logic
+        const images = [
+            "https://lh3.googleusercontent.com/d/1FwpCuMWxEqp0Iw0lSLciK98p_axA4CXB",
+            "https://lh3.googleusercontent.com/d/1XdGh9VTISDk564CnErU-gKBoj2VyixH1",
+            "https://lh3.googleusercontent.com/d/1IiunH-odbzKwyD7JwM19LEhuXektYsxc",
+            "https://lh3.googleusercontent.com/d/1mOgolrltCFVB_C14LY7DOfDB8jkOM_Wk"
+        ];
+        let currentIndex = 0;
+        const imgElement = document.getElementById('slideshow-img');
+        setInterval(() => {
+            if(!imgElement) return;
+            currentIndex = (currentIndex + 1) % images.length;
+            imgElement.style.opacity = 0;
+            setTimeout(() => {
+                imgElement.src = images[currentIndex];
+                imgElement.style.opacity = 1;
+            }, 500);
+        }, 4000);
+
+        // Scroll Animations (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
